@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninad Jagtap - Cybersecurity Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(to bottom, #0f172a, #581c87, #0f172a);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Particle Canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #a78bfa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .logo:hover {
+            color: #c4b5fd;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #a78bfa;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            min-height: 100vh;
+            padding-top: 100px;
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* Home Section */
+        .home-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+        }
+
+        .home-content {
+            flex: 1;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .home-content h2 {
+            font-size: 1.5rem;
+            color: #d1d5db;
+            margin-bottom: 1rem;
+        }
+
+        .home-content h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .home-content h1 .highlight {
+            color: #a78bfa;
+        }
+
+        .typewriter {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #a78bfa;
+            min-height: 80px;
+            margin-bottom: 1.5rem;
+        }
+
+        .cursor {
+            animation: blink 1s infinite;
+        }
+
+        .home-content p {
+            font-size: 1.1rem;
+            color: #9ca3af;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: #7c3aed;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #6d28d9;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid #7c3aed;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(124, 58, 237, 0.1);
+            transform: scale(1.05);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: #9ca3af;
+            transition: all 0.3s;
+            font-size: 2rem;
+        }
+
+        .social-links a:hover {
+            color: #a78bfa;
+            transform: scale(1.1);
+        }
+
+        .home-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .security-icon {
+            font-size: 15rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .about-image {
+            text-align: center;
+            font-size: 12rem;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .about-content {
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        .about-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            color: #9ca3af;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .about-content .highlight {
+            color: #a78bfa;
+            font-weight: 600;
+        }
+
+        .activities {
+            margin-top: 2rem;
+        }
+
+        .activities h3 {
+            color: #a78bfa;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .activities ul {
+            list-style: none;
+        }
+
+        .activities li {
+            color: #9ca3af;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .activities li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #a78bfa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .section-title .highlight {
+            color: #a78bfa;
+        }
+
+        .divider {
+            width: 80px;
+            height: 4px;
+            background: #7c3aed;
+            margin: 0 auto 3rem;
+            animation: scaleIn 0.6s ease-out;
+        }
+
+        /* Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .tool-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            text-align: center;
+            transition: all 0.3s;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .tool-card:hover {
+            border-color: #7c3aed;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.2);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            transition: all 0.3s;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .skill-category:hover {
+            border-color: #7c3aed;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.1);
+        }
+
+        .skill-category h3 {
+            color: #a78bfa;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-items {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .skill-item {
+            background: rgba(51, 65, 85, 0.5);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .skill-item:hover {
+            border-color: #7c3aed;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(124, 58, 237, 0.2);
+        }
+
+        /* Resume Section */
+        .resume-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .resume-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .resume-card:hover {
+            border-color: #7c3aed;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.1);
+        }
+
+        .resume-card h3 {
+            color: #a78bfa;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .experience-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+        }
+
+        .experience-item:last-child {
+            border-bottom: none;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .experience-title {
+            font-size: 1.3rem;
+            color: #a78bfa;
+            font-weight: 600;
+        }
+
+        .experience-company {
+            font-size: 1.1rem;
+            color: #d1d5db;
+            margin-top: 0.25rem;
+        }
+
+        .experience-type {
+            display: inline-block;
+            background: rgba(124, 58, 237, 0.2);
+            color: #c4b5fd;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .experience-date {
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        .experience-location {
+            color: #6b7280;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        .experience-description {
+            color: #9ca3af;
+            line-height: 1.6;
+            padding-left: 1rem;
+            border-left: 2px solid #7c3aed;
+            margin-top: 1rem;
+        }
+
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            transition: all 0.3s;
+        }
+
+        .cert-card:hover {
+            border-color: #7c3aed;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.2);
+        }
+
+        .cert-header {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-icon {
+            background: rgba(124, 58, 237, 0.2);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .cert-title {
+            font-size: 1.1rem;
+            color: #a78bfa;
+            font-weight: 600;
+        }
+
+        .cert-issuer {
+            color: #d1d5db;
+            margin-top: 0.25rem;
+        }
+
+        .cert-date {
+            color: #9ca3af;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-id {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #020617;
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #a78bfa;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #9ca3af;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #a78bfa;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
+            color: #9ca3af;
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes blink {
+            0%, 50% {
+                opacity: 1;
+            }
+            51%, 100% {
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .home-section {
+                flex-direction: column;
+            }
+
+            .home-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .typewriter {
+                font-size: 1.8rem;
+            }
+
+            .security-icon {
+                font-size: 8rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                font-size: 8rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showSection('home')">NJ.</a>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showSection('home')" class="nav-link active" data-section="home">🏠 Home</a></li>
+                <li><a href="#" onclick="showSection('about')" class="nav-link" data-section="about">👤 About</a></li>
+                <li><a href="#" onclick="showSection('skills')" class="nav-link" data-section="skills">💻 Skills</a></li>
+                <li><a href="#" onclick="showSection('resume')" class="nav-link" data-section="resume">📄 Resume</a></li>
+            </ul>
+            <a href="https://github.com/ninadjagtap" target="_blank" style="color: #d1d5db; font-size: 1.5rem; text-decoration: none;">⚙️</a>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="container">
+            <div class="home-section">
+                <div class="home-content">
+                    <h2>Hi There! 👋</h2>
+                    <h1>I'M <span class="highlight">NINAD JAGTAP</span></h1>
+                    <div class="typewriter">
+                        <span id="typewriter-text"></span><span class="cursor">|</span>
+                    </div>
+                    <p>
+                        Cybersecurity professional specializing in penetration testing, network security, 
+                        and security consulting. Certified Ethical Hacker with hands-on experience in 
+                        vulnerability assessment and red team operations.
+                    </p>
+                    <div class="btn-group">
+                        <a href="#" onclick="showSection('about')" class="btn btn-primary">About Me</a>
+                        <a href="#" onclick="showSection('resume')" class="btn btn-secondary">View Resume</a>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/ninadjagtap" target="_blank">⚙️</a>
+                        <a href="https://linkedin.com/in/ninadjagtap" target="_blank">💼</a>
+                        <a href="mailto:ninad@example.com">✉️</a>
+                    </div>
+                </div>
+                <div class="home-visual">
+                    <div class="security-icon">🛡️</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About <span class="highlight">Me</span></h2>
+            <div class="divider"></div>
+            
+            <div class="about-grid">
+                <div class="about-image">👨‍💻</div>
+                <div class="about-content">
+                    <h3>Know Who <span class="highlight">I'M</span></h3>
+                    <p>
+                        Hi Everyone, I am <span class="highlight">Ninad Jagtap</span> from 
+                        <span class="highlight">Mumbai, India</span>.
+                    </p>
+                    <p>
+                        I am currently working as an <span class="highlight">Associate Information Security Consultant</span> 
+                        at <span class="highlight">SecurEyes</span>.
+                    </p>
+                    <p>
+                        A passionate Cyber Security enthusiast ready to take up new challenges for professional 
+                        as well as organizational growth. I have significant knowledge in Network & Application 
+                        Security, cloud security, and have worked extensively with various security tools including 
+                        Nessus, Burp Suite, and Kali Linux.
+                    </p>
+                    <p>
+                        With certifications like <span class="highlight">CEH v12</span> and <span class="highlight">eJPT</span>, 
+                        I bring practical expertise in vulnerability assessment, penetration testing, and security consulting. 
+                        I possess strong interpersonal skills and can easily adapt to new technologies in dynamic environments.
+                    </p>
+                    
+                    <div class="activities">
+                        <h3>Apart from security testing, some activities I love!</h3>
+                        <ul>
+                            <li>Playing CTF Challenges</li>
+                            <li>Learning New Security Tools</li>
+                            <li>Reading Security Research Papers</li>
+                            <li>Bug Bounty Hunting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 5rem;">
+                <h2 class="section-title">Professional <span class="highlight">Toolset</span></h2>
+                <div class="divider"></div>
+                <div class="tools-grid">
+                    <div class="tool-card">Burp Suite</div>
+                    <div class="tool-card">Nessus</div>
+                    <div class="tool-card">Kali Linux</div>
+                    <div class="tool-card">Metasploit</div>
+                    <div class="tool-card">Wireshark</div>
+                    <div class="tool-card">OWASP ZAP</div>
+                    <div class="tool-card">Nmap</div>
+                    <div class="tool-card">SQLMap</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Professional <span class="highlight">Skillset</span></h2>
+            <div class="divider"></div>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>🔒 Security Testing</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">VAPT</div>
+                        <div class="skill-item">Penetration Testing</div>
+                        <div class="skill-item">Web App Security</div>
+                        <div class="skill-item">Network Security</div>
+                        <div class="skill-item">Host & Network Pen Testing</div>
+                        <div class="skill-item">Application Security</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>🌐 Network & Infrastructure</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">Network Security Implementation</div>
+                        <div class="skill-item">Information Security Consulting</div>
+                        <div class="skill-item">Cloud Security</div>
+                        <div class="skill-item">Networking</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>🔧 Security Tools</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">Burp Suite</div>
+                        <div class="skill-item">Nessus</div>
+                        <div class="skill-item">Kali Linux</div>
+                        <div class="skill-item">Metasploit</div>
+                        <div class="skill-item">Wireshark</div>
+                        <div class="skill-item">OWASP ZAP</div>
+                        <div class="skill-item">Nmap</div>
+                        <div class="skill-item">SQLMap</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>⚔️ Specializations</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">Red Teaming</div>
+                        <div class="skill-item">CTF</div>
+                        <div class="skill-item">Incident Response</div>
+                        <div class="skill-item">Security Consulting</div>
+                        <div class="skill-item">Vulnerability Assessment</div>
+                        <div class="skill-item">Threat Hunting</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 5rem;">
+                <h2 class="section-title"><span class="highlight">Tools</span> I Use</h2>
+                <div class="divider"></div>
+                <div class="tools-grid">
+                    <div class="tool-card" style="font-size: 3rem;">🔒</div>
+                    <div class="tool-card" style="font-size: 3rem;">🛡️</div>
+                    <div class="tool-card" style="font-size: 3rem;">🔐</div>
+                    <div class="tool-card" style="font-size: 3rem;">⚔️</div>
+                    <div class="tool-card" style="font-size: 3rem;">🎯</div>
+                    <div class="tool-card" style="font-size: 3rem;">🔍</div>
+                    <div class="tool-card" style="font-size: 3rem;">💻</div>
+                    <div class="tool-card" style="font-size: 3rem;">🌐</div>
+                    <div class="tool-card" style="font-size: 3rem;">📡</div>
+                    <div class="tool-card" style="font-size: 3rem;">🔧</div>
+                    <div class="tool-card" style="font-size: 3rem;">⚡</div>
+                    <div class="tool-card" style="font-size: 3rem;">🎮</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="section">
+        <div class="container">
+            <div class="resume-header">
+                <h2 class="section-title">My <span class="highlight">Resume</span></h2>
+                <button class="btn btn-primary">📥 Download CV</button>
+            </div>
+
+            <!-- Education -->
+            <div class="resume-card">
+                <h3>🎓 Education</h3>
+                <div class="experience-item">
+                    <h4 class="experience-title">Bachelor of Technology - BTech</h4>
+                    <p class="experience-company">Information Technology</p>
+                    <p style="color: #9ca3af; margin-top: 0.5rem;">G.H. Raisoni Society's, College of Engineering and Management, Pune</p>
+                    <p class="experience-date" style="margin-top: 0.5rem;">2018 - 2022</p>
+                </div>
+            </div>
+
+            <!-- Experience -->
+            <div class="resume-card">
+                <h3>💼 Work Experience</h3>
+                
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h4 class="experience-title">Associate Information Security Consultant</h4>
+                            <p class="experience-company">SecurEyes</p>
+                            <span class="experience-type">Full-time</span>
+                        </div>
+                        <div style="text-align: right;">
+                            <p class="experience-date">📅 Nov 2024 - Present</p>
+                            <p class="experience-location">Mumbai, Maharashtra, India · On-site</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h4 class="experience-title">Cyber Security Consultant</h4>
+                            <p class="experience-company">Decypher Technologies</p>
+                            <span class="experience-type">Full-time</span>
+                        </div>
+                        <div style="text-align: right;">
+                            <p class="experience-date">📅 Jun 2023 - Nov 2024</p>
+                            <p class="experience-location">Pune, Maharashtra, India · On-site</p>
+                        </div>
+                    </div>
+                    <p class="experience-description">Information Security Consulting and Network Security Implementation</p>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h4 class="experience-title">Red Team Training</h4>
+                            <p class="experience-company">Spin The Hack</p>
+                            <span class="experience-type">Internship</span>
+                        </div>
+                        <div style="text-align: right;">
+                            <p class="experience-date">📅 Jan 2023 - Jun 2023</p>
+                            <p class="experience-location">Remote</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h4 class="experience-title">Software Engineer Intern</h4>
+                            <p class="experience-company">Webwing Infotech.</p>
+                            <span class="experience-type">Internship</span>
+                        </div>
+                        <div style="text-align: right;">
+                            <p class="experience-date">📅 Feb 2021 - Mar 2021</p>
+                            <p class="experience-location">Pune, Maharashtra, India · Remote</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="resume-card">
+                <h3>🏆 Certifications & Licenses</h3>
+                <div class="certs-grid">
+                    <div class="cert-card">
+                        <div class="cert-header">
+                            <div class="cert-icon">📜</div>
+                            <div>
+                                <h4 class="cert-title">Certified Ethical Hacker v12 (CEH)</h4>
+                                <p class="cert-issuer">EC-Council</p>
+                            </div>
+                        </div>
+                        <p class="cert-date">Issued Jan 2024 · Expires Jan 2027</p>
+                        <p class="cert-id">Credential ID: ECC9268745031</p>
+                        <a href="#" style="color: #a78bfa; margin-top: 1rem; display: inline-block;">Show Credential →</a>
+                    </div>
+
+                    <div class="cert-card">
+                        <div class="cert-header">
+                            <div class="cert-icon">📜</div>
+                            <div>
+                                <h4 class="cert-title">eLearn Junior Penetration Tester (eJPT)</h4>
+                                <p class="cert-issuer">INE Security</p>
+                            </div>
+                        </div>
+                        <p class="cert-date">Issued Mar 2024 · Expires Mar 2027</p>
+                        <p class="cert-id">Credential ID: 97339290</p>
+                        <a href="#" style="color: #a78bfa; margin-top: 1rem; display: inline-block;">Show Credential →</a>
+                    </div>
+
+                    <div class="cert-card">
+                        <div class="cert-header">
+                            <div class="cert-icon">📜</div>
+                            <div>
+                                <h4 class="cert-title">Ethical Hacking Essentials (EHE)</h4>
+                                <p class="cert-issuer">CodeRed</p>
+                            </div>
+                        </div>
+                        <p class="cert-date">Issued Jan 2023</p>
+                        <p class="cert-id">Credential ID: 368326427253</p>
+                        <a href="#" style="color: #a78bfa; margin-top: 1rem; display: inline-block;">Show Credential →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Ninad Jagtap</h3>
+                <p>Associate Information Security Consultant passionate about cybersecurity and ethical hacking.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#" onclick="showSection('home')">Home</a>
+                <a href="#" onclick="showSection('about')">About</a>
+                <a href="#" onclick="showSection('skills')">Skills</a>
+                <a href="#" onclick="showSection('resume')">Resume</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Me</h3>
+                <a href="https://github.com/ninadjagtap" target="_blank">⚙️ GitHub</a>
+                <a href="https://linkedin.com/in/ninadjagtap" target="_blank">💼 LinkedIn</a>
+                <a href="mailto:ninad@example.com">✉️ Email</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Designed and Developed by Ninad Jagtap</p>
+            <p style="margin-top: 0.5rem;">Copyright © 2025 NJ</p>
+        </div>
+    </footer>
+
+    <script>
+        // Particle Animation
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 80;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 2;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(139, 92, 246, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            particles.forEach((p1, i) => {
+                particles.slice(i + 1).forEach(p2 => {
+                    const dx = p1.x - p2.x;
+                    const dy = p1.y - p2.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 120) {
+                        ctx.strokeStyle = `rgba(139, 92, 246, ${0.15 * (1 - distance / 120)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                });
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Typewriter Effect
+        const texts = [
+            "Security Consultant",
+            "Penetration Tester",
+            "Red Team Operator",
+            "CTF Player"
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterElement = document.getElementById('typewriter-text');
+
+        function typeWriter() {
+            const currentText = texts[textIndex];
+            
+            if (!isDeleting) {
+                typewriterElement.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+                
+                if (charIndex === currentText.length) {
+                    setTimeout(() => isDeleting = true, 2000);
+                    setTimeout(typeWriter, 2000);
+                } else {
+                    setTimeout(typeWriter, 150);
+                }
+            } else {
+                typewriterElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+                
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    textIndex = (textIndex + 1) % texts.length;
+                    setTimeout(typeWriter, 500);
+                } else {
+                    setTimeout(typeWriter, 75);
+                }
+            }
+        }
+
+        typeWriter();
+
+        // Section Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Update nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.section === sectionId) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
